@@ -10,18 +10,13 @@
 /* jshint node: true, devel: true */
 'use strict';
 
-const DASHBOT_API_KEY = (process.env.DASHBOT_API_KEY) ? 
-  process.env.DASHBOT_API_KEY :
-  config.get('dashbotApiKey');
-
 const 
   bodyParser = require('body-parser'),
   config = require('config'),
   crypto = require('crypto'),
   express = require('express'),
   https = require('https'),  
-  request = require('request'),
-  dashbot = require('dashbot')(DASHBOT_API_KEY).facebook;
+  request = require('request');
 
 var app = express();
 app.set('port', process.env.PORT || 5000);
@@ -56,6 +51,14 @@ const SERVER_URL = (process.env.SERVER_URL) ?
   (process.env.SERVER_URL) :
   config.get('serverURL');
 
+const DASHBOT_API_KEY = (process.env.DASHBOT_API_KEY) ? 
+  process.env.DASHBOT_API_KEY :
+  config.get('dashbotApiKey');
+  
+  
+const dashbot = require('dashbot')(DASHBOT_API_KEY).facebook
+  
+  
 if (!(APP_SECRET && VALIDATION_TOKEN && PAGE_ACCESS_TOKEN && SERVER_URL)) {
   console.error("Missing config values");
   process.exit(1);
