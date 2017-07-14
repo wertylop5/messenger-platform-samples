@@ -10,13 +10,18 @@
 /* jshint node: true, devel: true */
 'use strict';
 
+const DASHBOT_API_KEY = (process.env.DASHBOT_API_KEY) ? 
+  process.env.DASHBOT_API_KEY :
+  config.get('dashbotApiKey');
+
 const 
   bodyParser = require('body-parser'),
   config = require('config'),
   crypto = require('crypto'),
   express = require('express'),
   https = require('https'),  
-  request = require('request');
+  request = require('request'),
+  dashbot = require('dashbot')(DASHBOT_API_KEY).facebook;
 
 var app = express();
 app.set('port', process.env.PORT || 5000);
@@ -83,8 +88,10 @@ app.get('/webhook', function(req, res) {
 app.post('/webhook', function (req, res) {
   var data = req.body;
 
+  console.log(`data: ${JSON.stringify()}`);
   // Make sure this is a page subscription
   if (data.object == 'page') {
+	  dashbot.logIncoming(data);
     // Iterate over each entry
     // There may be multiple if batched
     data.entry.forEach(function(pageEntry) {
@@ -93,11 +100,11 @@ app.post('/webhook', function (req, res) {
 
       // Iterate over each messaging event
       pageEntry.messaging.forEach(function(messagingEvent) {
-        if (messagingEvent.optin) {
+        /*if (messagingEvent.optin) {
           receivedAuthentication(messagingEvent);
-        } else if (messagingEvent.message) {
+        } else */if (messagingEvent.message) {
           receivedMessage(messagingEvent);
-        } else if (messagingEvent.delivery) {
+        /*} else if (messagingEvent.delivery) {
           receivedDeliveryConfirmation(messagingEvent);
         } else if (messagingEvent.postback) {
           receivedPostback(messagingEvent);
@@ -105,7 +112,7 @@ app.post('/webhook', function (req, res) {
           receivedMessageRead(messagingEvent);
         } else if (messagingEvent.account_linking) {
           receivedAccountLink(messagingEvent);
-        } else {
+        */} else {
           console.log("Webhook received unknown messagingEvent: ", messagingEvent);
         }
       });
@@ -803,13 +810,15 @@ function sendAccountLinking(recipientId) {
  *
  */
 function callSendAPI(messageData) {
-  request({
+	const req = {
     uri: 'https://graph.facebook.com/v2.6/me/messages',
     qs: { access_token: PAGE_ACCESS_TOKEN },
     method: 'POST',
     json: messageData
 
-  }, function (error, response, body) {
+  };
+	
+  request(req, function (error, response, body) {
     if (!error && response.statusCode == 200) {
       var recipientId = body.recipient_id;
       var messageId = body.message_id;
@@ -817,6 +826,7 @@ function callSendAPI(messageData) {
       if (messageId) {
         console.log("Successfully sent message with id %s to recipient %s", 
           messageId, recipientId);
+		  dashbot.logOutgoing(req);
       } else {
       console.log("Successfully called Send API for recipient %s", 
         recipientId);
