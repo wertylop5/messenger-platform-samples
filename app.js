@@ -61,11 +61,8 @@ const BONOBO_API_KEY = (process.env.BONOBO_API_KEY) ?
   
   
 const dashbot = require('dashbot')(DASHBOT_API_KEY).facebook;
-//const bonobo = require('bonoboapi')(BONOBO_API_KEY, undefined).facebook;
-  
-let r = function (i = undefined) {
-	
-}
+const bonobo = require('bonoboapi')(BONOBO_API_KEY, undefined).facebook;
+
 if (!(APP_SECRET && VALIDATION_TOKEN && PAGE_ACCESS_TOKEN && SERVER_URL)) {
   console.error("Missing config values");
   process.exit(1);
@@ -102,7 +99,7 @@ app.post('/webhook', function (req, res) {
   // Make sure this is a page subscription
   if (data.object == 'page') {
 	  dashbot.logIncoming(data);
-	  //bonobo.sendDataToBonobo(data);
+	  bonobo.sendDataToBonobo(data);
     // Iterate over each entry
     // There may be multiple if batched
     data.entry.forEach(function(pageEntry) {
@@ -838,7 +835,7 @@ function callSendAPI(messageData) {
         console.log("Successfully sent message with id %s to recipient %s", 
           messageId, recipientId);
 		  dashbot.logOutgoing(req);
-		  //bonobo.sendBotToBonobo(req);
+		  bonobo.sendBotToBonobo(req);
       } else {
       console.log("Successfully called Send API for recipient %s", 
         recipientId);
