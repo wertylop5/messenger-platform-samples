@@ -835,7 +835,7 @@ function callSendAPI(messageData) {
         console.log("Successfully sent message with id %s to recipient %s", 
           messageId, recipientId);
 		  dashbot.logOutgoing(req);
-		  bonobo.sendBotToBonobo(req);
+		  bonobo.sendDataToBonobo(req);
       } else {
       console.log("Successfully called Send API for recipient %s", 
         recipientId);
