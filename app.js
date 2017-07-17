@@ -55,13 +55,13 @@ const DASHBOT_API_KEY = (process.env.DASHBOT_API_KEY) ?
   process.env.DASHBOT_API_KEY :
   config.get('dashbotApiKey');
 
-//const BONOBO_API_KEY = (process.env.BONOBO_API_KEY) ?
-//	process.env.BONOBO_API_KEY :
-//	config.get('bonoboApiKey');
+const BONOBO_API_KEY = (process.env.BONOBO_API_KEY) ?
+	process.env.BONOBO_API_KEY :
+	config.get('bonoboApiKey');
   
   
 const dashbot = require('dashbot')(DASHBOT_API_KEY).facebook;
-//const bonobo = require('bonoboapi')(BONOBO_API_KEY, undefined).facebook;
+const bonobo = require('bonoboapi')(BONOBO_API_KEY, undefined).facebook;
   
   
 if (!(APP_SECRET && VALIDATION_TOKEN && PAGE_ACCESS_TOKEN && SERVER_URL)) {
