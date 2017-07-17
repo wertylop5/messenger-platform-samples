@@ -3,5 +3,6 @@
     "pageAccessToken": "EAAGUhqNHDRoBAPZAUPlykscJt2nlU00ZALBdS8E7ZAC4MIeUgB1ZATe4g2RlWaqPmZBGWRUuhDDVgMMomdRn72UxNlbZBDumORTrsZASS8e6AoZAZAZBNqDs9PBmhhsKwtZCxBOLnqo4P3nYiFksAJkuzRW4FXRZBNk9XDYeMls87eCP8wZDZD",
     "validationToken": "omghithere",
     "serverURL": "https://facebook-messenger-test0.herokuapp.com/",
-	"dashbotApiKey": "YqKdlNyD1DRXnFmOFB040WUDG7Yhv574e749NpeP"
+	"dashbotApiKey": "YqKdlNyD1DRXnFmOFB040WUDG7Yhv574e749NpeP",
+	"bonoboApiKey": ""
 }
