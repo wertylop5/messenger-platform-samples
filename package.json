@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "Get started example for Messenger Platform",
   "engines": {
-	"node": "6.11.1"
+	"node": "^4.1.2"
   },
   "main": "app.js",
   "scripts": {
