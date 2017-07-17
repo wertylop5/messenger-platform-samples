@@ -21,6 +21,7 @@
     "body-parser": "^1.15.0",
     "config": "^1.20.4",
     "dashbot": "^9.2.0",
+	"bonoboapi": "^1.0.1",
     "ejs": "^2.4.2",
     "express": "^4.13.4",
     "request": "^2.72.0"
