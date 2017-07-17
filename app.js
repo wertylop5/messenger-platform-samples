@@ -61,9 +61,11 @@ const BONOBO_API_KEY = (process.env.BONOBO_API_KEY) ?
   
   
 const dashbot = require('dashbot')(DASHBOT_API_KEY).facebook;
-const bonobo = require('bonoboapi')(BONOBO_API_KEY, undefined).facebook;
+//const bonobo = require('bonoboapi')(BONOBO_API_KEY, undefined).facebook;
   
-  
+let r = function (i = undefined) {
+	
+}
 if (!(APP_SECRET && VALIDATION_TOKEN && PAGE_ACCESS_TOKEN && SERVER_URL)) {
   console.error("Missing config values");
   process.exit(1);
